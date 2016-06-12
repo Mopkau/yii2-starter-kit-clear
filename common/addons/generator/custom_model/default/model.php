@@ -139,7 +139,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
         <?php } ?>
     <?php endforeach; ?>
        <?php echo "]" ?>
-    }
+   <?php echo "}"; ?>
     /**
      * @inheritdoc
      */
