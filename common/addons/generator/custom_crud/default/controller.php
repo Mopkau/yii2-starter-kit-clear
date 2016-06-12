@@ -52,7 +52,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
     <?php echo "
     public function getModelClass(){
-    return  {modelClass}::className();
+    return  {$modelClass}::className();
     }";
     ?>
 
