@@ -52,13 +52,13 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
 
     <?php echo "
     public function getModelClass(){
-    return  Orders::className();
+    return  {modelClass}::className();
     }";
     ?>
-    
+
     <?php echo "
     public function getModelSearchClass(){
-    return  OrdersSearch::className();
-    }";
+    return  {$searchModelClass}::className();
+    }\n";
     ?>
 }
