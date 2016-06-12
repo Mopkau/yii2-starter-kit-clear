@@ -17,13 +17,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$this->title = $this->context->labelMany;
+$this->title = $this->context->labelOne;
 $this->params['breadcrumbs'][] = ['label' => $this->context->labelMany, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-
-    <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 
     <p>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
