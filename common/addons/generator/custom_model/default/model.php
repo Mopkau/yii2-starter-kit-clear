@@ -84,7 +84,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     */
     public function behaviors()
     {
-    return [
+    <?php echo "return [" ?>
     <?php foreach ($labels as $name => $label): ?>
         <?php if($name == 'author_id'){ ?>
             <?php echo  "
@@ -138,7 +138,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
             ],\n"; ?>
         <?php } ?>
     <?php endforeach; ?>
-        ];
+       <?php echo "]" ?>
     }
     /**
      * @inheritdoc
