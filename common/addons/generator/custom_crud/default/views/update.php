@@ -16,8 +16,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$this->title = <?= $generator->generateString('{$this->labelOne}: ') ?> . $model-><?= $generator->getNameAttribute() ?>;
-$this->params['breadcrumbs'][] = ['label' => $this->labelOne, 'url' => ['index']];
+$this->title = <?= $generator->generateString('{$this->context->labelOne}: ') ?> . $model-><?= $generator->getNameAttribute() ?>;
+$this->params['breadcrumbs'][] = ['label' => $this->context->labelOne, 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model-><?= $generator->getNameAttribute() ?>, 'url' => ['view', <?= $urlParams ?>]];
 $this->params['breadcrumbs'][] = <?= $generator->generateString('Редактирование') ?>;
 ?>
