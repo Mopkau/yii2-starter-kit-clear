@@ -11,6 +11,8 @@
 	use Exception;
 	use Yii;
 	class BackendController extends Controller{
+		public $labelMany = 'Переопредели меня';
+		public $labelOne = 'Переопредели меня';
 		/**
 		 * Lists all KeyStorageItem models.
 		 * @return mixed
@@ -116,14 +118,5 @@
 		public function getModelSearchClass()
 		{
 			throw new Exception('Добавь в контроллер getModelClass с классом модели!!!');
-		}
-		/**
-		 * Return class of the model
-		 *
-		 * @throws Exception
-		 * @return string
-		 */
-		public function getModelCrudLabels(){
-			throw new Exception('Добавь лейбы для круда, экономь время');
 		}
 	}
