@@ -7,9 +7,12 @@
 composer.phar
 ## remove in production!
 composer.lock
-
+# TESTS
+/tests/
+/tests/*
 # IDE
 .idea
+.idea/*
 nbproject
 .buildpath
 .project

@@ -171,7 +171,12 @@ if (YII_ENV_PROD) {
 if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-        'class'=>'yii\gii\Module'
+        'class'=>'yii\gii\Module',
+        'generators' => [
+            'custom_model'   => [
+                'class'     => 'common\addons\generator\custom_model\Generator',
+            ]
+        ]
     ];
 
     $config['components']['cache'] = [
