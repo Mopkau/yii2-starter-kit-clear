@@ -69,6 +69,19 @@
 			}
 		}
 
+		public function actionView($id)
+		{
+			$model = $this->findModel($id);
+
+			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				return $this->redirect(['index']);
+			} else {
+				return $this->render('view', [
+					'model' => $model,
+				]);
+			}
+		}
+
 		/**
 		 * Deletes an existing KeyStorageItem model.
 		 * If deletion is successful, the browser will be redirected to the 'index' page.
