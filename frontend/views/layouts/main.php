@@ -7,11 +7,6 @@ use yii\widgets\Breadcrumbs;
 
 $this->beginContent('@frontend/views/layouts/base.php')
 ?>
-    <div class="container">
-
-        <?php echo Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
 
         <?php if(Yii::$app->session->hasFlash('alert')):?>
             <?php echo \yii\bootstrap\Alert::widget([
@@ -20,12 +15,6 @@ $this->beginContent('@frontend/views/layouts/base.php')
             ])?>
         <?php endif; ?>
 
-        <!-- Example of your ads placing -->
-        <?php echo \common\widgets\DbText::widget([
-            'key' => 'ads-example'
-        ]) ?>
-
         <?php echo $content ?>
 
-    </div>
 <?php $this->endContent() ?>
