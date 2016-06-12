@@ -26,6 +26,7 @@
 			return $this->render('index', [
 				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
+				'labels'=>$this-getModelCrudLabels()
 			]);
 		}
 
@@ -87,7 +88,8 @@
 		 */
 		protected function findModel($id)
 		{
-			if (($model = ActiveQuery::modelClass($this->modelClass)->findOne($id)) !== null) {
+			$query = new ActiveQuery($this->modelClass);
+			if (($model = $query->andWhere(['id'=>$id])->one()) !== null) {
 				return $model;
 			} else {
 				throw new NotFoundHttpException('The requested page does not exist.');
@@ -103,5 +105,25 @@
 		public function getModelClass()
 		{
 			throw new Exception('Добавь в контроллер getModelClass с классом модели!!!');
+		}
+
+		/**
+		 * Return class of the model
+		 *
+		 * @throws Exception
+		 * @return string
+		 */
+		public function getModelSearchClass()
+		{
+			throw new Exception('Добавь в контроллер getModelClass с классом модели!!!');
+		}
+		/**
+		 * Return class of the model
+		 *
+		 * @throws Exception
+		 * @return string
+		 */
+		public function getModelCrudLabels(){
+			throw new Exception('Добавь лейбы для круда, экономь время');
 		}
 	}
