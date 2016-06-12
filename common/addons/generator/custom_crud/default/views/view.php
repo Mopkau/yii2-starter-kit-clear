@@ -17,7 +17,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$this->title = $model->context->labelMany;
+$this->title = $this->context->labelMany;
 $this->params['breadcrumbs'][] = ['label' => $this->context->labelMany, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
