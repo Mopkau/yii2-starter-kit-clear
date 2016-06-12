@@ -19,16 +19,14 @@ class FrontendAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $css = [
-        'css/style.css',
+
     ];
 
     public $js = [
-        'js/app.js',
+
     ];
 
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'common\assets\Html5shiv',
+        
     ];
 }
