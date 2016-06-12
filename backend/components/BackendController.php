@@ -20,7 +20,7 @@
 		public function actionIndex()
 		{
 
-			$searchModel = new $this->modelClass();
+			$searchModel = new $this->modelSearchClass();
 			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 			$dataProvider->sort = [
 				'defaultOrder'=>['id'=>SORT_DESC]
@@ -28,7 +28,6 @@
 			return $this->render('index', [
 				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
-				'labels'=>$this-getModelCrudLabels()
 			]);
 		}
 
@@ -69,6 +68,12 @@
 			}
 		}
 
+		/**
+		 * Updates an existing KeyStorageItem model.
+		 * If update is successful, the browser will be redirected to the 'view' page.
+		 * @param integer $id
+		 * @return mixed
+		 */
 		public function actionView($id)
 		{
 			$model = $this->findModel($id);
