@@ -175,6 +175,9 @@ if (YII_ENV_DEV) {
         'generators' => [
             'custom_model'   => [
                 'class'     => 'common\addons\generator\custom_model\Generator',
+            ],
+            'custom_crud' => [
+                'class' => 'common\addons\generator\custom_crud\Generator'
             ]
         ]
     ];
