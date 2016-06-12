@@ -46,7 +46,19 @@ use yii\filters\VerbFilter;
 class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
 {
     <?php echo "
-    public \$modelName = '{$modelClass}::classname'
+    public \$labelMany = '{$modelClass}';
+    public \$labelOne = '{$modelClass}';
     \n"; ?>
 
+    <?php echo "
+    public function getModelClass(){
+    return  Orders::className();
+    }";
+    ?>
+    
+    <?php echo "
+    public function getModelSearchClass(){
+    return  OrdersSearch::className();
+    }";
+    ?>
 }

@@ -6,16 +6,19 @@
 	 * Date: 12.06.16
 	 * Time: 8:32 PM
 	 */
+	use yii\db\ActiveQuery;
 	use yii\web\Controller;
+	use Exception;
+	use Yii;
 	class BackendController extends Controller{
-		public $modelName;
 		/**
 		 * Lists all KeyStorageItem models.
 		 * @return mixed
 		 */
-		public function actionIndex($modelName)
+		public function actionIndex()
 		{
-			$searchModel = new $modelName();
+
+			$searchModel = new $this->modelClass();
 			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 			$dataProvider->sort = [
 				'defaultOrder'=>['id'=>SORT_DESC]
@@ -31,9 +34,9 @@
 		 * If creation is successful, the browser will be redirected to the 'view' page.
 		 * @return mixed
 		 */
-		public function actionCreate($modelName)
+		public function actionCreate()
 		{
-			$model = new $modelName();
+			$model = new $this->modelClass();
 
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
 				return $this->redirect(['index']);
@@ -82,12 +85,23 @@
 		 * @return item the loaded model
 		 * @throws NotFoundHttpException if the model cannot be found
 		 */
-		protected function findModel($modelName, $id)
+		protected function findModel($id)
 		{
-			if (($model = $$modelName::findOne($id)) !== null) {
+			if (($model = ActiveQuery::modelClass($this->modelClass)->findOne($id)) !== null) {
 				return $model;
 			} else {
 				throw new NotFoundHttpException('The requested page does not exist.');
 			}
+		}
+
+		/**
+		 * Return class of the model
+		 *
+		 * @throws Exception
+		 * @return string
+		 */
+		public function getModelClass()
+		{
+			throw new Exception('Добавь в контроллер getModelClass с классом модели!!!');
 		}
 	}
