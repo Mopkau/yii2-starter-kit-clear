@@ -156,6 +156,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
         <?php foreach ($labels as $name => $label): ?>
             <?php if($name == 'thumbnail_path'){ ?>
             <?php echo "[['thumbnail'], 'safe']"; ?>
+            <?php }; ?>
         <?php endforeach; ?>
         ];
     }
