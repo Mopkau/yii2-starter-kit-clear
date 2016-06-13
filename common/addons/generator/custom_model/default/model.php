@@ -28,6 +28,7 @@ use \yii\helpers\Html;
 use \yii\base\UnknownPropertyException;
 use yii\db\Expression;
 use trntv\filekit\widget\Upload;
+use metalguardian\formBuilder\ActiveFormBuilder;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
@@ -266,25 +267,26 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     * Admin form generator
     **/
 <?php echo "public function getFormConfig()"; ?>
-<?php echo "{"; ?>
+<?php echo "{\n"; ?>
 <?php echo "return [\n"; ?>
 <?php $disableConfigFields = [
-    'id','author_id','updater_id','create_time','update_time','description'
+    'id','author_id','updater_id','create_time','update_time','description','thumbnail_base_url','thumbnail_path'
 ]; ?>
 <?php foreach ($tableSchema->columns as $column): ?>
-    <?php if($column->phpType == "integer" && !in_array($column->name,$disableConfigFields)){ ?>
+    <?php if($column->phpType == "string" && !in_array($column->name,$disableConfigFields)){ ?>
     <?php echo "
     '{$column->name}' => [
         'type' => ActiveFormBuilder::INPUT_TEXT,
     ],"; ?>
-    <?php }elseif($column->phpType == 'string' && !in_array($column->name,$disableConfigFields)){ ?>
+    <?php }elseif($column->phpType == 'integer' && !in_array($column->name,$disableConfigFields)){ ?>
     <?php echo "
     '{$column->name}' => [
         'type' => ActiveFormBuilder::INPUT_DROPDOWN_LIST,
         'items' => ArrayHelper::map(Categories::find()->all(),'id','label'),
         'options' => [
         'prompt' => 'Выберите категорию',
-        ],";?>
+        ],\n";?>
+    <?php echo "],\n"; ?>
     <?php }elseif($column->name == 'description'){ ?>
     <?php echo "
     '{$column->name}' => [
@@ -315,5 +317,6 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     <?php } ?>
 
 <?php endforeach; ?>
+<?php echo "];"; ?>
 <?php echo "}"; ?>
 }
