@@ -151,7 +151,13 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function rules()
     {
-        return [<?= "\n            " . implode(",\n            ", $rules) . ",\n        " ?>];
+        return [
+        <?= "\n            " . implode(",\n            ", $rules) . ",\n        " ?>
+        <?php foreach ($labels as $name => $label): ?>
+            <?php if($name == 'thumbnail_path'){ ?>
+            <?php echo "[['thumbnail'], 'safe']"; ?>
+        <?php endforeach; ?>
+        ];
     }
 
     /**
@@ -307,7 +313,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     ],"; ?>
     <?php }elseif($column->name == 'thumbnail_path'){ ?>
     <?php echo "
-    '{$column->name}' => [
+    'thumbnail' => [
         'type' => ActiveFormBuilder::INPUT_WIDGET,
             'widgetClass' => Upload::className(),
             'options'=>[
