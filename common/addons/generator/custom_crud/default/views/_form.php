@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
 <?php echo "<?= \$form->renderForm(\$model, \$model->getFormConfig()) ?>";?>
 
-<?php echo "<div class="form-group">"; ?>
+<?php echo '<div class="form-group">'; ?>
         <?php echo "<?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>"; ?>
 <?php echo "</div>"; ?>
 
