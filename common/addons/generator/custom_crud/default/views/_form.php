@@ -22,21 +22,19 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
 
-    <?= "<?php " ?>$form = ActiveForm::begin(); ?>
+<?php echo "<?php \$form = \metalguardian\formBuilder\ActiveFormBuilder::begin(); ?>"; ?>
 
-<?php foreach ($generator->getColumnNames() as $attribute) {
-    if (in_array($attribute, $safeAttributes)) {
-        echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
-    }
-} ?>
-    <div class="form-group">
-        <?= "<?= " ?>Html::submitButton($model->isNewRecord ? <?= $generator->generateString('Create') ?> : <?= $generator->generateString('Update') ?>, ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+<?php echo "<?= \$form->renderForm(\$model, \$model->getFormConfig()) ?>";?>
 
-    <?= "<?php " ?>ActiveForm::end(); ?>
+<?php echo "<div class="form-group">"; ?>
+        <?php echo "<?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>"; ?>
+<?php echo "</div>"; ?>
+
+<?php echo "<?php \metalguardian\formBuilder\ActiveFormBuilder::end(); ?>"; ?>
 
 </div>
