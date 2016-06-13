@@ -273,39 +273,43 @@ class Generator extends \yii\gii\Generator
         $types = [];
         $lengths = [];
         foreach ($table->columns as $column) {
-            if ($column->autoIncrement) {
-                continue;
-            }
-            if (!$column->allowNull && $column->defaultValue === null) {
-                $types['required'][] = $column->name;
-            }
-            switch ($column->type) {
-                case Schema::TYPE_SMALLINT:
-                case Schema::TYPE_INTEGER:
-                case Schema::TYPE_BIGINT:
-                    $types['integer'][] = $column->name;
-                    break;
-                case Schema::TYPE_BOOLEAN:
-                    $types['boolean'][] = $column->name;
-                    break;
-                case Schema::TYPE_FLOAT:
-                case 'double': // Schema::TYPE_DOUBLE, which is available since Yii 2.0.3
-                case Schema::TYPE_DECIMAL:
-                case Schema::TYPE_MONEY:
-                    $types['number'][] = $column->name;
-                    break;
-                case Schema::TYPE_DATE:
-                case Schema::TYPE_TIME:
-                case Schema::TYPE_DATETIME:
-                case Schema::TYPE_TIMESTAMP:
-                    $types['safe'][] = $column->name;
-                    break;
-                default: // strings
-                    if ($column->size > 0) {
-                        $lengths[$column->size][] = $column->name;
-                    } else {
-                        $types['string'][] = $column->name;
-                    }
+            $disableCollums = [ 'alias' , 'thumbnail_base_url' , 'thumbnail_path' , 'author_id' , 'updater_id' , 'create_time' , 'update_time' ];
+            if ( !in_array ( $column->name , $disableCollums ) ) {
+                if ( $column->autoIncrement ) {
+                    continue;
+                }
+                if ( !$column->allowNull && $column->defaultValue === NULL ) {
+                    $types[ 'required' ][] = $column->name;
+                }
+                switch ( $column->type ) {
+                    case Schema::TYPE_SMALLINT:
+                    case Schema::TYPE_INTEGER:
+                    case Schema::TYPE_BIGINT:
+                        $types[ 'integer' ][] = $column->name;
+                        break;
+                    case Schema::TYPE_BOOLEAN:
+                        $types[ 'boolean' ][] = $column->name;
+                        break;
+                    case Schema::TYPE_FLOAT:
+                    case 'double': // Schema::TYPE_DOUBLE, which is available since Yii 2.0.3
+                    case Schema::TYPE_DECIMAL:
+                    case Schema::TYPE_MONEY:
+                        $types[ 'number' ][] = $column->name;
+                        break;
+                    case Schema::TYPE_DATE:
+                    case Schema::TYPE_TIME:
+                    case Schema::TYPE_DATETIME:
+                    case Schema::TYPE_TIMESTAMP:
+                        $types[ 'safe' ][] = $column->name;
+                        break;
+                    default: // strings
+                        if ( $column->size > 0 ) {
+                            $lengths[ $column->size ][] = $column->name;
+                        }
+                        else {
+                            $types[ 'string' ][] = $column->name;
+                        }
+                }
             }
         }
         $rules = [];
