@@ -29,6 +29,7 @@ use \yii\base\UnknownPropertyException;
 use yii\db\Expression;
 use trntv\filekit\widget\Upload;
 use metalguardian\formBuilder\ActiveFormBuilder;
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
