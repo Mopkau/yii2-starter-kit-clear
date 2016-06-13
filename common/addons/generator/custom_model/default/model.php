@@ -26,6 +26,8 @@ use yii\behaviors\TimestampBehavior;
 use trntv\filekit\behaviors\UploadBehavior;
 use \yii\helpers\Html;
 use \yii\base\UnknownPropertyException;
+use yii\db\Expression;
+use trntv\filekit\widget\Upload;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
@@ -259,4 +261,59 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     <?= $relation[0] . "\n" ?>
     }
 <?php endforeach; ?>
+
+    /**
+    * Admin form generator
+    **/
+<?php echo "public function getFormConfig()"; ?>
+<?php echo "{"; ?>
+<?php echo "return [\n"; ?>
+<?php $disableConfigFields = [
+    'id','author_id','updater_id','create_time','update_time','description'
+]; ?>
+<?php foreach ($tableSchema->columns as $column): ?>
+    <?php if($column->phpType == "integer" && !in_array($column,$disableConfigFields)){ ?>
+    <?php echo "
+    '{$column}' => [
+        'type' => ActiveFormBuilder::INPUT_TEXT,
+    ],"; ?>
+    <?php }elseif($column->phpType == 'string' && !in_array($column,$disableConfigFields)){ ?>
+    <?php echo "
+    '{$column}' => [
+        'type' => ActiveFormBuilder::INPUT_DROPDOWN_LIST,
+        'items' => ArrayHelper::map(Categories::find()->all(),'id','label'),
+        'options' => [
+        'prompt' => 'Выберите категорию',
+        ],";?>
+    <?php }elseif($column == 'description'){ ?>
+    <?php echo "
+    '{$column}' => [
+        'type' => ActiveFormBuilder::INPUT_WIDGET,
+            'widgetClass' => \yii\imperavi\Widget::className(),
+            'options'=>[
+                'plugins' => ['fullscreen', 'fontcolor', 'video'],
+                'options'=>[
+                    'minHeight' => 400,
+                    'maxHeight' => 400,
+                    'buttonSource' => true,
+                    'convertDivs' => false,
+                    'removeEmptyTags' => false,
+                    'imageUpload' => Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi'])
+                ]
+            ]
+    ],"; ?>
+    <?php }elseif($column == 'thumbnail_path'){ ?>
+    <?php echo "
+    '{$column}' => [
+        'type' => ActiveFormBuilder::INPUT_WIDGET,
+            'widgetClass' => Upload::className(),
+            'options'=>[
+                'url' => ['/file-storage/upload'],
+                'maxFileSize' => 5000000, // 5 MiB
+            ]
+    ],"; ?>
+    <?php } ?>
+    * @property <?= "{$column->phpType} \${$column->name}\n" ?>
+<?php endforeach; ?>
+<?php echo "}"; ?>
 }
