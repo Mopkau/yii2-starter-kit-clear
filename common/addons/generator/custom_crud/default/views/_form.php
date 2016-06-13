@@ -21,13 +21,12 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form \metalguardianormBuilder\ActiveFormBuilder */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
 
-<?php echo "<?php \$form = \metalguardian\formBuilder\ActiveFormBuilder::begin(); ?>"; ?>
+<?php echo "<?php \$form = ActiveFormBuilder::begin(); ?>"; ?>
 
 <?php echo "<?= \$form->renderForm(\$model, \$model->getFormConfig()) ?>";?>
 
@@ -35,6 +34,6 @@ use yii\widgets\ActiveForm;
         <?php echo "<?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>"; ?>
 <?php echo "</div>"; ?>
 
-<?php echo "<?php \metalguardian\formBuilder\ActiveFormBuilder::end(); ?>"; ?>
+<?php echo "<?php ActiveFormBuilder::end(); ?>"; ?>
 
 </div>
