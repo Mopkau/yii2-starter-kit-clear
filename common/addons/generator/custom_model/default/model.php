@@ -272,22 +272,22 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     'id','author_id','updater_id','create_time','update_time','description'
 ]; ?>
 <?php foreach ($tableSchema->columns as $column): ?>
-    <?php if($column->phpType == "integer" && !in_array($column,$disableConfigFields)){ ?>
+    <?php if($column->phpType == "integer" && !in_array($column->name,$disableConfigFields)){ ?>
     <?php echo "
-    '{$column}' => [
+    '{$column->name}' => [
         'type' => ActiveFormBuilder::INPUT_TEXT,
     ],"; ?>
-    <?php }elseif($column->phpType == 'string' && !in_array($column,$disableConfigFields)){ ?>
+    <?php }elseif($column->phpType == 'string' && !in_array($column->name,$disableConfigFields)){ ?>
     <?php echo "
-    '{$column}' => [
+    '{$column->name}' => [
         'type' => ActiveFormBuilder::INPUT_DROPDOWN_LIST,
         'items' => ArrayHelper::map(Categories::find()->all(),'id','label'),
         'options' => [
         'prompt' => 'Выберите категорию',
         ],";?>
-    <?php }elseif($column == 'description'){ ?>
+    <?php }elseif($column->name == 'description'){ ?>
     <?php echo "
-    '{$column}' => [
+    '{$column->name}' => [
         'type' => ActiveFormBuilder::INPUT_WIDGET,
             'widgetClass' => \yii\imperavi\Widget::className(),
             'options'=>[
@@ -298,13 +298,13 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
                     'buttonSource' => true,
                     'convertDivs' => false,
                     'removeEmptyTags' => false,
-                    'imageUpload' => Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi'])
+                    'imageUpload' => Yii::\$app->urlManager->createUrl(['/file-storage/upload-imperavi'])
                 ]
             ]
     ],"; ?>
-    <?php }elseif($column == 'thumbnail_path'){ ?>
+    <?php }elseif($column->name == 'thumbnail_path'){ ?>
     <?php echo "
-    '{$column}' => [
+    '{$column->name}' => [
         'type' => ActiveFormBuilder::INPUT_WIDGET,
             'widgetClass' => Upload::className(),
             'options'=>[
@@ -313,7 +313,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
             ]
     ],"; ?>
     <?php } ?>
-    * @property <?= "{$column->phpType} \${$column->name}\n" ?>
+
 <?php endforeach; ?>
 <?php echo "}"; ?>
 }
