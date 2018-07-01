@@ -173,12 +173,24 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class'=>'yii\gii\Module',
         'generators' => [
-            'custom_model'   => [
-                'class'     => 'common\addons\generator\custom_model\Generator',
+            'custom_model' => [
+                //generator class
+                'class'     => 'common\addons\giiant\generators\model\Generator',
+                'createdByColumn' => 'author_id',
+                'updatedByColumn' => 'updater_id',
+                //setting for out templates
+                'templates' => [
+                    'default' => '@common/addons/giiant/generators/model/default'
+                ]
             ],
             'custom_crud' => [
-                'class' => 'common\addons\generator\custom_crud\Generator'
-            ]
+                //generator class
+                'class'     => 'common\addons\giiant\generators\crud\Generator',
+                //setting for out templates
+                'templates' => [
+                    'default' => '@common/addons/giiant/generators/crud/default'
+                ]
+            ],
         ]
     ];
 

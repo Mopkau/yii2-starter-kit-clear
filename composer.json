@@ -51,7 +51,11 @@
     "symfony/process": "^3.0",
     "metalguardian/yii2-form-builder": "^1.0",
     "raveren/kint": "^1.0",
-    "tuyakhov/yii2-materialize": "*"
+    "tuyakhov/yii2-materialize": "*",
+    "schmunk42/yii2-giiant": "@dev",
+    "2amigos/yii2-translateable-behavior": "^0.1.3",
+    "zhuravljov/yii2-datetime-widgets": "^1.1"
+
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",
